@@ -1,11 +1,21 @@
+rm(list = ls())
+cat("\014") 
+if (!require(GGally))
+{
+  install.packages("GGally")
+}
+
+if (!require(plotly))
+{
+  install.packages("plotly")
+}
+
 library("shiny")
 library("ggplot2")
 library("GGally")
 library("plotly")
 
 #setwd("/Users/Elise/DataViz/HW3")
-rm(list = ls())
-cat("\014") 
 df <- read.csv("dataset_Facebook.csv", sep=";", header=T)
 
 ui <- fluidPage(
