@@ -34,7 +34,10 @@ server <- function(input, output) {
       geom_point(aes(size = Total.Interactions, colour = Type))
   })
   output$scatter <- renderPlotly({
-    ggpairs(df, columns = c(16:19), columnLabels = colnames(df)[16:19])
+    scatter_data <- subset(df, select = c("comment", "like", "share", "Total.Interactions", "Type"))
+    ggplotly(ggpairs(data = scatter_data, columns = 1:4, columnLabels = colnames(scatter_data)[1:4],mapping = ggplot2::aes(alpha = 0.6, color=Type))+
+               theme(legend.position = "none"))
+    
   })
   output$parallel <- renderPlotly({
     ggparcoord(data = df, columns = 16:19, groupColumn = 'Type', scale = 'center') 
